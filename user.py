@@ -29,5 +29,3 @@ class User:
             self.gold_card_points -= amount
         else:
             print("Insufficient amount of points to spend")
-
-    
