@@ -8,6 +8,10 @@ def hello_world():
 def success():
     return "success"
 
+@app.route('/repeat/<phrase>')
+def repeat(phrase):
+    return f"{phrase}"
+
 @app.route('/hello/<name>') # for a route '/hello/____' anything after '/hello/' gets passed as a variable 'name'
 def hello(name):
     print(name)
