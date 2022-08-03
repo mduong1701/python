@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<style>
+    .box{
+    height: 100px;
+    width: 100px;
+    background-color: {{box_color}};
+    border: 2px solid black;
+    margin: 20px;
+}
+</style>
+<body>
+    <div id="welcome">Welcome!</div>
+    <div id="boxes">
+        {% for i in range(num_times) %}
+        <div class="box"></div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

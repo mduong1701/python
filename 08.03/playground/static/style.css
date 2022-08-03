@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.box{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(141, 141, 190);
+    border: 2px solid black;
+    margin: 20px;
+}
+
+#boxes{
+    display: flex;
+    justify-content:flex-start;
+    flex-wrap: wrap;
+}
+
+#welcome{
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+}
