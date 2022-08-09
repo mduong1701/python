@@ -56,7 +56,7 @@ function reverseWords(str) {
 // const reverseWordOrder = (str) => {
 // }
 function reverseWordOrder(str){
-    var strArray = str.split(" ");
+    var strArray = str.trim().split(/\s+/);
     var result = "";
     var left = 0;
     var right = strArray.length - 1;
