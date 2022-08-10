@@ -1,0 +1,25 @@
+INSERT INTO dojos(name, created_at, updated_at)
+VALUES ("AAAAA", NOW(), NOW()), ("BBBB", NOW(), NOW()),("CCCCC", NOW(), NOW());
+-------------------------------
+DELETE FROM dojos;
+-------------------------------
+INSERT INTO dojos(name, created_at, updated_at)
+VALUES ("DDDDD", NOW(), NOW()), ("EEEEE", NOW(), NOW()), ("FFFFF", NOW(), NOW());
+-------------------------------
+INSERT INTO ninjas(first_name, last_name, age, created_at, updated_at, dojo_id)
+VALUES ("aaa", "bbb", 18, NOW(), NOW(), 4), ("ccc", "ddd", 20, NOW(), NOW(), 4), ("eee", "fff", 19, NOW(), NOW(), 4);
+-------------------------------
+INSERT INTO ninjas(first_name, last_name, age, created_at, updated_at, dojo_id)
+VALUES ("ggg", "hhh", 25, NOW(), NOW(), 5), ("iii", "jjj", 23, NOW(), NOW(), 5), ("kkk", "lll", 24, NOW(), NOW(), 5);
+-------------------------------
+INSERT INTO ninjas(first_name, last_name, age, created_at, updated_at, dojo_id)
+VALUES ("mmm", "nnn", 21, NOW(), NOW(), 6), ("ooo", "ppp", 28, NOW(), NOW(), 6), ("qqq", "rrr", 19, NOW(), NOW(), 6);
+-------------------------------
+SELECT * FROM ninjas
+WHERE dojo_id = 4;
+-------------------------------
+SELECT * FROM ninjas
+WHERE dojo_id = 6;
+-------------------------------
+SELECT * FROM dojos
+WHERE id = 6;

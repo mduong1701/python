@@ -1,0 +1,40 @@
+INSERT INTO friendships_schema.users (first_name, last_name, created_at, updated_at)
+VALUES ("aaa", "bbb", NOW(), NOW()),
+		("ccc", "ddd", NOW(), NOW()),
+        ("eee", "fff", NOW(), NOW()),
+        ("ggg", "hhh", NOW(), NOW()),
+        ("iii", "jjj", NOW(), NOW()),
+        ("kkk", "lll", NOW(), NOW());
+----------------------------------------------------------------
+INSERT INTO friendships_schema.friendships (user_id, friend_id, created_at, updated_at)
+VALUES (1,2, NOW(), NOW()),(1,4, NOW(), NOW()),(1,6, NOW(), NOW()),
+        (2,1, NOW(), NOW()),(2,3, NOW(), NOW()),(2,5, NOW(), NOW()),
+        (3,2, NOW(), NOW()),(3,5, NOW(), NOW()),
+        (4,3, NOW(), NOW()),
+        (5,1, NOW(), NOW()),(5,6, NOW(), NOW()),
+        (6,2, NOW(), NOW()),(6,3, NOW(), NOW());
+----------------------------------------------------------------
+SELECT users.first_name, users.last_name, users2.first_name as friend_first_name, users2.last_name as friend_last_name FROM friendships_schema.users
+JOIN friendships_schema.friendships on users.id = friendships.user_id
+LEFT JOIN friendships_schema.users as users2 ON users2.id = friendships.friend_id
+----------------------------------------------------------------
+SELECT users2.first_name as friend_first_name, users2.last_name as friend_last_name FROM friendships_schema.users
+JOIN friendships_schema.friendships on users.id = friendships.user_id
+LEFT JOIN friendships_schema.users as users2 ON users2.id = friendships.friend_id
+WHERE users.id = 1;
+----------------------------------------------------------------
+SELECT count(friendships.id) FROM friendships_schema.users
+JOIN friendships_schema.friendships on users.id = friendships.user_id
+LEFT JOIN friendships_schema.users as users2 ON users2.id = friendships.friend_id;
+----------------------------------------------------------------
+SELECT count(user_id) as num, users.first_name, users.last_name FROM friendships_schema.friendships
+JOIN friendships_schema.users ON users.id = friendships.user_id
+GROUP BY user_id
+ORDER BY num DESC
+LIMIT 1;
+----------------------------------------------------------------
+SELECT users2.first_name, users2.last_name FROM friendships_schema.users
+JOIN friendships_schema.friendships on users.id = friendships.user_id
+LEFT JOIN friendships_schema.users as users2 ON users2.id = friendships.friend_id
+WHERE users.id = 3
+ORDER BY users2.first_name;

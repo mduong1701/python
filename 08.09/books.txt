@@ -1,0 +1,57 @@
+
+-------------------------------
+
+-------------------------------
+INSERT INTO users(first_name, last_name, created_at, updated_at)
+VALUES ("Jane", "Amsden", NOW(), NOW()), 
+("Emily", "Dixon", NOW(), NOW()), 
+("Theodore", "Dostoevsky", NOW(), NOW()), 
+("William", "Shapiro", NOW(), NOW()), 
+("Lao", "Xiu", NOW(), NOW());
+-------------------------------
+INSERT INTO books(title, created_at, updated_at)
+VALUES ("C Sharp", NOW(), NOW()),
+("Java", NOW(), NOW()), 
+("Python", NOW(), NOW()), 
+("PHP", NOW(), NOW()), 
+("Ruby", NOW(), NOW());
+-------------------------------
+UPDATE books
+SET title = "C#"
+WHERE id = 1;
+-------------------------------
+UPDATE users
+SET first_name = "Bill"
+WHERE id = 4;
+-------------------------------
+INSERT INTO favorites(users_id, books_id)
+VALUES (1, 1), (1, 2);
+-------------------------------
+INSERT INTO favorites(users_id, books_id)
+VALUES (2, 1), (2, 2), (2, 3);
+-------------------------------
+INSERT INTO favorites(users_id, books_id)
+VALUES (3, 1), (3, 2), (3, 3), (3, 4);
+-------------------------------
+INSERT INTO favorites(users_id, books_id)
+VALUES (4, 1), (4, 2), (4, 3), (4, 4), (4, 5);
+-------------------------------
+SELECT * FROM users
+JOIN favorites ON favorites.users_id = users.id
+WHERE favorites.books_id = 3;
+-------------------------------
+DELETE FROM favorites
+WHERE books_id = 3 AND users_id = 2;
+-------------------------------
+INSERT INTO favorites(users_id, books_id)
+VALUES (5, 2);
+-------------------------------
+SELECT * FROM books
+JOIN favorites ON favorites.books_id = books.id
+JOIN users ON users.id = favorites.users_id
+WHERE users.id = 3;
+-------------------------------
+SELECT * FROM users
+JOIN favorites ON favorites.users_id = users.id
+JOIN books ON books.id = favorites.books_id
+WHERE books.id = 5;
