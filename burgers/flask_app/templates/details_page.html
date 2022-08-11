@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Lunch!</title>
+</head>
+<body>
+    <a href="/" class="btn btn-info btn-outline-primary" >Home</a>
+    <div class="d-flex justify-content-around flex-wrap p-5">
+
+
+            <div class="card col-3 bg-dark text-light">
+                <div class="card-body">
+                    <h2 class="card-title text-primary">{{ burger['name'] }}</h2>
+                    <p class="card-text">Bun: {{burger['bun']}}</p>
+                    <p class="card-text">Meat: {{burger['meat']}}</p>
+                </div>
+                <div class="card-footer">
+                    <h3 class="card-subtitle">Calories: {{burger['calories']}}</h3>
+                    <p class="card-subtitle">Created on: {{ burger['created_at'].strftime("%B %d, %Y  at %H:%M:%S") }}</p>
+                </div>
+                <a href="/edit_page/{{burger['id']}}"  >Edit</a>
+                <a href="/delete/{{burger['id']}}"  >Delete</a>
+            </div>
+
+    </div>
+</body>
+</html>
