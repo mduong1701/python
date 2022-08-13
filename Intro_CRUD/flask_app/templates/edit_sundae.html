@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Edit a Sundae</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+</head>
+<body>
+    <form class="w-50 mx-auto d-block" method="post" action="/sundaes/{{single_sundae.id}}/submit_edit">
+        <h1 class="text-center">Edit {{single_sundae.name}}</h1>
+        <div class="mb-3">
+            <label class="form-label">Shop:</label>
+            <select class="form-select" name="shops_id" value="{{single_sundae.shops_id}}">
+                {% for shop in all_shops %}
+                    {% if shop.id == single_sundae.shops_id %}
+                        <option value="{{shop.id}}" selected>{{shop.name}}</option>
+                    {% else %}
+                        <option value="{{shop.id}}">{{shop.name}}</option>
+                    {% endif %}
+                    
+                {% endfor %}
+            </select>
+        </div>
+
+        <input type="hidden" name="sundaes.id" value="{{single_sundae.id}}">
+
+        <div class="mb-3">
+            <label class="form-label">Name:</label>
+            <input type="text" class="form-control" name="name" value="{{single_sundae.name}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Flavor:</label>
+            <input type="text" class="form-control" name="flavor" value="{{single_sundae.flavor}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Number of scoops:</label>
+            <input type="number" class="form-control" name="num_scoops" value="{{single_sundae.num_scoops}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Sauce:</label>
+            <input type="text" class="form-control" name="sauce" value="{{single_sundae.sauce}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Topping 1:</label>
+            <input type="text" class="form-control" name="topping1" value="{{single_sundae.topping1}}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Topping 2:</label>
+            <input type="text" class="form-control" name="topping2" value="{{single_sundae.topping2}}">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Container:</label>
+            <input type="text" class="form-control" name="container" value="{{single_sundae.container}}">
+        </div>
+        <input type="submit" class="btn btn-primary btn-lg">
+    </form>
+</body>
+</html>
