@@ -12,13 +12,13 @@
 </head>
 
 <body>
-    <div class="d-flex justify-content-evenly mt-5">
+    <div class="frame d-flex justify-content-evenly mt-5">
         <div class="left">
             <h1>New Dojo</h1>
-            <form action="/create_dojo" , method="post">
+            <form action="/create_dojo" method="post">
                 <div class="mb-3">
                     <label>Name: </label>
-                    <input type="text">
+                    <input type="text" name="name">
                 </div>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
@@ -27,15 +27,15 @@
         <div class="right">
             <h1>All Dojos</h1>
             <div class="border border-success">
-                <a href="#">aaaaaa</a>
+                {% for dojo in all_dojos %}
+                    <p><a href="/dojos/{{dojo.id}}">{{dojo.name}}</a></p>
+                {% endfor %}
             </div>
             <div class="mt-3">
-                <a href="#">Add Ninja</a>
+                <a href="/add_ninja">Add Ninja</a>
             </div>
             
         </div>
-
-    </div>
 
     </div>
 
