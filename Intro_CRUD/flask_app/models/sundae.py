@@ -69,7 +69,7 @@ class Sundae:
 
     @classmethod
     def get_one(cls, data):
-        query = "SELECT * FROM sundaes JOIN shops ON sundaes.shops_id = shops.id WHERE sundaes.id = %(id)s"
+        query = "SELECT * FROM sundaes JOIN shops ON sundaes.shops_id = shops.id WHERE sundaes.id = %(id)s;"
         results = connectToMySQL('sundaes_schema').query_db(query, data)
         if (len(results)) < 1:
             return False

@@ -18,15 +18,21 @@
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for current_user in current_users %}
             <tr>
-                <th scope="row">{{current_user["id"]}}</th>
-                <td>{{current_user["first_name"]}}</td>
-                <td>{{current_user["last_name"]}}</td>
-                <td>{{current_user["email"]}}</td>
+                <th scope="row">{{current_user.id}}</th>
+                <td>{{current_user.first_name}}</td>
+                <td>{{current_user.last_name}}</td>
+                <td>{{current_user.email}}</td>
+                <td>
+                    <a href="/users/{{current_user.id}}/view">Show</a>
+                    <a href="/users/{{current_user.id}}/edit">Edit</a>
+                    <a href="/users/{{current_user.id}}/delete">Delete</a>
+                </td>
             </tr>
                 {% endfor %}
         </tbody>
