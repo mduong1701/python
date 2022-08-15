@@ -5,17 +5,16 @@ function balanceIndex(arr){
     }
 
     if (arr.length == 1){
-        index = 0;
-        return index;
+        return index = 0;
     }
 
     if (arr.length == 2){
         return index;
     }
 
-    for (var i = 1; i < arr.length - 1; i++){
+    for (var i = 1; i < arr.length; i++){
         var leftSum = 0, rightSum = 0;
-        for (var j = i - 1; j > -1; j--){
+        for (var j = i - 1; j >= 0; j--){
             leftSum += arr[j];
         }
         for (var k = i + 1; k < arr.length; k++){
@@ -28,7 +27,9 @@ function balanceIndex(arr){
     return index;
 }
     
+console.log(balanceIndex([]));
 console.log(balanceIndex([2]));
 console.log(balanceIndex([1,2]));
 console.log(balanceIndex([1,2,1]));
 console.log(balanceIndex([1,2,1,7,4]));
+console.log(balanceIndex([1,2,1,7,4,11]));
