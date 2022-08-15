@@ -25,7 +25,6 @@ class Ninja:
         query = "SELECT * FROM ninjas JOIN dojos ON ninjas.dojo_id = dojos.id WHERE dojos.id = %(id)s;"
         
         results = connectToMySQL('dojos_ninjas_schema').query_db(query, data)
-        print(results)
         ninjas = []
 
         for ninja in results:
