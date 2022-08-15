@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Dojo Survey</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+    <div class="frame mt-5">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for messsage in messages %}
+        <div class="alert alert-danger text-center" role="alert">
+                    {{messsage}}
+        </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/save_survey" method="post">
+            <div class="mb-3">
+                <label class="form-label">Name: </label>
+                <input type="text" class="form-control" name="name">
+            </div>
+
+            <div class="mb-3">
+                <label>Dojo Location:</label>
+                <select class="form-select" aria-label="Default select example" name="location">
+                    <option value="" selected>--Select A Location--</option>
+                    <option value="san_jose">San Jose</option>
+                    <option value="los_angeles">Los Angeles</option>
+                    <option value="burbank">Burbank</option>
+                    <option value="sunnyvale">Sunnyvale</option>
+                    <option value="chicago">Chicago</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Favorite Language:</label>
+                <select class="form-select" aria-label="Default select example" name="language">
+                    <option value="" selected>--Select A Language--</option>
+                    <option value="c++">C++</option>
+                    <option value="python">Python</option>
+                    <option value="golang">Golang</option>
+                    <option value="javascript">Javascript</option>
+                    <option value="java">Java</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Comments: </label>
+                <input type="text" class="form-control" name="comment">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
