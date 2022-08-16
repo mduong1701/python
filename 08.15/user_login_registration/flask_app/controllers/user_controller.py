@@ -9,6 +9,7 @@ bcrypt = Bcrypt(app)
 @app.route("/")
 def main_page():
     # all_dojos = Dojo.get_all()
+    session.clear()
     return render_template("index.html")
 
 @app.route("/register", methods=["POST"])
