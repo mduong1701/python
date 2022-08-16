@@ -13,20 +13,19 @@
 
 <body>
     <div class="frame mt-5">
-        <div>
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            {% for messsage in messages %}
-            <p class="alert alert-danger text-center" role="alert">
-                {{messsage}}
-            </p>
-            {% endfor %}
-            {% endif %}
-            {% endwith %}
-        </div>
         <div class="d-flex justify-content-evenly">
             <div class="left">
                 <h1>Register</h1>
+                {% with messages = get_flashed_messages(category_filter=['register']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Flash AHHHHHHH!!!!</strong>
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
                 <form action="/register" method="post">
                     <div class="mb-3">
                         <label class="form-label">First Name:</label>
@@ -53,6 +52,16 @@
         </div>
         <div class="right">
             <h1>Login</h1>
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Flash AHHHHHHH!!!!</strong>
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
             <form action="/login" method="post">
                 <div class="mb-3">
                     <label class="form-label">Email address:</label>
