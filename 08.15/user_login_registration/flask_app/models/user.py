@@ -5,7 +5,7 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app import app
 import re
-from flask_bcrypt import Bcrypt        
+from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app) 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
@@ -25,23 +25,22 @@ class User:
         is_valid = True
         if len(data["first_name"]) < 2:
             is_valid = False
-            flash("First name must be at least 2 characters!!!", 'register')
+            flash("First name must be at least 2 characters!!!", "register")
 
         if len(data["last_name"]) < 2:
             is_valid = False
-            flash("Last name must be at least 2 characters!!!", 'register')
+            flash("Last name must be at least 2 characters!!!", "register")
 
         if not EMAIL_REGEX.match(data['email']):
             is_valid = False
-            flash("Invalid email address!", 'register')
+            flash("Invalid email address!", "register")
 
         if len(data["password"]) < 8:
             is_valid = False
-            flash("Password must be at least 8 characters!!!", 'register')
-
+            flash("Password must be at least 8 characters!!!", "register")
         if (data["password"]) != (data["confirm"]):
             is_valid = False
-            flash("The password does not match!!!", 'register')
+            flash("The password does not match!!!", "register")
         return is_valid
 
     @staticmethod

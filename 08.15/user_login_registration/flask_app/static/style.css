@@ -11,6 +11,6 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 .frame{
     width: 70%;
     margin: 0 auto;
-    height: 700px;
+    height: 1200px;
     background-color: rgba(240, 248, 255, 0.203);
 }

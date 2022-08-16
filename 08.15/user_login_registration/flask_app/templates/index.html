@@ -13,19 +13,20 @@
 
 <body>
     <div class="frame mt-5">
+        
         <div class="d-flex justify-content-evenly">
             <div class="left">
                 <h1>Register</h1>
                 {% with messages = get_flashed_messages(category_filter=['register']) %}
             {% if messages %}
-            <div class="alert alert-danger" role="alert">
-                <strong>Flash AHHHHHHH!!!!</strong>
-                {% for message in messages %}
-                <p>{{message}}</p>
-                {% endfor %}
-            </div>
+                <div class="alert alert-danger" role="alert">
+                    <strong>Flash AHHHHHHH!!!!</strong>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                </div>
             {% endif %}
-            {% endwith %}
+        {% endwith %}
                 <form action="/register" method="post">
                     <div class="mb-3">
                         <label class="form-label">First Name:</label>
@@ -46,36 +47,36 @@
                     <div class="mb-3">
                         <label class="form-label">Confirm Password:</label>
                         <input type="password" class="form-control" name="confirm">
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-        </div>
-        <div class="right">
-            <h1>Login</h1>
-            {% with messages = get_flashed_messages(category_filter=['login']) %}
-            {% if messages %}
-            <div class="alert alert-danger" role="alert">
-                <strong>Flash AHHHHHHH!!!!</strong>
-                {% for message in messages %}
-                <p>{{message}}</p>
-                {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
             </div>
+            <div class="right">
+                <h1>Login</h1>
+                {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Flash AHHHHHHH!!!!</strong>
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                </div>
             {% endif %}
-            {% endwith %}
-            <form action="/login" method="post">
-                <div class="mb-3">
-                    <label class="form-label">Email address:</label>
-                    <input type="text" class="form-control" name="login_email">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Password:</label>
-                    <input type="password" class="form-control" name="login_password">
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+        {% endwith %}
+                <form action="/login" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Email address:</label>
+                        <input type="text" class="form-control" name="login_email">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password:</label>
+                        <input type="password" class="form-control" name="login_password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
         </div>
-    </div>
-        
+
     </div>
 
 </body>

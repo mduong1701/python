@@ -9,7 +9,6 @@ bcrypt = Bcrypt(app)
 @app.route("/")
 def main_page():
     # all_dojos = Dojo.get_all()
-    session.clear()
     return render_template("index.html")
 
 @app.route("/register", methods=["POST"])
@@ -35,7 +34,7 @@ def register():
     }
 
     if User.is_exist(data):
-        flash("This email address has been taken!", 'register')
+        flash("This email address has been taken!", "register")
         return redirect("/")
     
     session['user_id'] = User.register(data)
@@ -51,11 +50,11 @@ def login():
     user_in_db = User.get_by_email(data)
     # user is not registered in the db
     if not user_in_db:
-        flash("Invalid Email/Password", 'login')
+        flash("Invalid Email/Password", "login")
         return redirect("/")
     if not bcrypt.check_password_hash(user_in_db.password, request.form['login_password']):
         # if we get False after checking the password
-        flash("Invalid Email/Password", 'login')
+        flash("Invalid Email/Password", "login")
         return redirect('/')
     # if the passwords matched, we set the user_id into session
     session['user_id'] = user_in_db.id
