@@ -18,7 +18,7 @@
             <div>All posted recipes: </div>
             <div class="d-flex justify-content-right">
                 <div><a href="/recipes/new">+ Create</a></div>
-                <div class="ms-5"><a href="/">logout</a></div>
+                <div class="ms-5"><a href="/log_out">logout</a></div>
             </div>
         </div>
         <table class="table table-success table-striped">
@@ -31,14 +31,28 @@
                 </tr>
             </thead>
             <tbody>
-
+            {% for recipe in all_recipes %}
                 <tr>
-                    <td>1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>{{recipe.name}}</th>
+                    {% if recipe.under == 0 %}
+                    <td>No</td>
+                    {% else %}
+                    <td>Yes</td>
+                    {% endif %}
+                    <td>{{recipe.user.first_name}}</td>
+                    {% if recipe.user_id == session['user_id'] %}
+                    <td>
+                        <a href="/view_recipe/{{recipe.id}}">view recipe</a>
+                        <a href="/edit/{{recipe.id}}">edit</a>
+                        <a href="/delete/{{recipe.id}}">delete</a>
+                    </td>
+                    {% else %}
+                    <td>
+                        <a href="/view_recipe/{{recipe.id}}">view recipe</a>
+                    </td>
+                    {% endif %}
                 </tr>
-
+            {% endfor %}
             </tbody>
         </table>
     </div>

@@ -13,7 +13,7 @@
 
 <body>
     <div class="frame mt-5">
-        <h2>Add a New Recipe!</h2>
+        <h2>Edit Recipe!</h2>
         {% with messages = get_flashed_messages(category_filter=['recipe']) %}
             {% if messages %}
                 <div class="alert alert-danger" role="alert">
@@ -27,28 +27,28 @@
         <div class="d-flex justify-content-between">
             <!-- <div class="text-danger">Description must not be blank</div> -->
             <div class="d-flex justify-content-right">
-                <div><a href="/recipes/new">back to recipe</a></div>
+                <div><a href="/dashboard">back to recipes</a></div>
                 <div class="ms-5"><a href="/">logout</a></div>
             </div>
         </div>
         <div class="mt-3 w-100">
-            <form action="/save_recipe" method="post">
+            <form action="/save_edit/{{edit_recipe.id}}" method="post">
                 <div class="d-flex justify-content-evenly">
                     <div class="container-fluid">
 
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name">
+                            <input type="text" class="form-control" name="name" value="{{edit_recipe.name}}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <textarea name="description" cols="40" rows="5"class="form-control"></textarea> 
+                            <textarea name="description" cols="40" rows="5"class="form-control" value="{{edit_recipe.description}}"></textarea> 
                         </div>
 
 
                         <div class="mb-3">
                             <label class="form-label">Instructions</label>
-                            <textarea name="Instruction" cols="40" rows="5"class="form-control"></textarea> 
+                            <textarea name="Instruction" cols="40" rows="5"class="form-control"value="{{edit_recipe.Instruction}}"></textarea> 
                         </div>
 
                     </div>
@@ -61,12 +61,12 @@
                             <p>Under 30 minutes?</p>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio"  id="inlineRadio1"
-                                name="under" value="1">
+                                name="under" value="1" >
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio"  id="inlineRadio2"
-                                name="under" value="0">
+                                name="under" value="0" checked="checked">
                                 <label class="form-check-label" for="inlineRadio2">No</label>
                             </div>
                         </div>

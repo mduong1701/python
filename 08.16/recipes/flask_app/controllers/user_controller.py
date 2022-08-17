@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, session, request
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.recipe import Recipe
 from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -68,12 +69,84 @@ def dashboard():
         "id": session['user_id']
     }
     single_user = User.get_by_id(data)
-    return render_template("dashboard.html", single_user=single_user)
+    all_recipes = Recipe.get_all()
+    print(all_recipes)
+    return render_template("dashboard.html", single_user=single_user, all_recipes=all_recipes)
 
 @app.route("/recipes/new")
 def add_recipe_page():
     return render_template("add_recipe_page.html")
 
+@app.route("/save_recipe", methods=["POST"])
+def save_recipe():
+    data = {
+        "name": request.form["name"],
+        "description": request.form["description"],
+        "Instruction": request.form["Instruction"],
+        # "created_at": request.form["created_at"],
+        "under": request.form["under"],
+        "user_id": session["user_id"]
+    }
+    if not Recipe.validate_recipe(data):
+        return redirect("/recipes/new")
+    Recipe.save(data)
+    return redirect("/dashboard")
+
+@app.route("/save_edit/<int:id>", methods=["POST"])
+def save_edit(id):
+    data = {
+        "id": id,
+        "name": request.form["name"],
+        "description": request.form["description"],
+        "Instruction": request.form["Instruction"],
+        # "created_at": request.form["created_at"],
+        "under": request.form["under"],
+        "user_id": session["user_id"]
+    }
+    if not Recipe.validate_recipe(data):
+        return redirect(f"/edit/{id}")
+    Recipe.edit(data)
+    return redirect("/dashboard")
+
+@app.route("/view_recipe/<int:id>")
+def view_recipe(id):
+    data = {
+        "id": id
+    }
+    info = Recipe.get_one(data)
+    return render_template("view_recipe.html", info=info)
+
+@app.route("/delete/<int:id>")
+def delete_recipe(id):
+    data = {
+        "id": id
+    }
+    Recipe.delete_recipe(data)
+    return redirect("/dashboard")
+
+@app.route("/edit/<int:id>")
+def edit_recipe(id):
+    data = {
+        "id": id
+    }
+    edit_recipe = Recipe.get_one(data)
+    return render_template("edit_page.html", edit_recipe = edit_recipe)
+
+@app.route("/log_out")
+def log_out():
+    session.clear()
+    return redirect("/dashboard")
+
+# class Recipe:
+# self.id = data["id"]
+#         self.name = data["name"]
+#         self.description = data["description"]
+#         self.instruction = data["instruction"]
+#         self.under = data["under"]
+#         self.created_at = data["created_at"]
+#         self.updated_at = data["updated_at"]
+#         self.user_id = data["user_id"]
+#         self.user = None
 # @app.route("/create_dojo", methods = ["POST"])
 # def create_dojo():
 #     data = {
