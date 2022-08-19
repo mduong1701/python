@@ -15,3 +15,8 @@ async function getCoderData() {
     return coderData;
 }
 console.log(getCoderData());
+
+http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&APPID={INSERTAPIKEY}
+// Make sure to put your unique API key in the URL (taking out the brackets).
+// &APPID={INSERTAPIKEY} will need to be at the end of each URL you access below and in the assignment.
+
