@@ -11,6 +11,20 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 .frame{
     width: 70%;
     margin: 0 auto;
-    height: 1200px;
-    /* background-color: rgba(240, 248, 255, 0.203); */
+    height: 1450px;
+}
+
+nav {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(27, 118, 41);
+}
+
+.nav{
+    width: 70%;
+    margin: 0 auto;
+}
+
+#zero-waste{
+    margin-top: 200px;
 }

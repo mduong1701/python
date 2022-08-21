@@ -20,3 +20,118 @@ http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&APPID={INSERTAPI
 // Make sure to put your unique API key in the URL (taking out the brackets).
 // &APPID={INSERTAPIKEY} will need to be at the end of each URL you access below and in the assignment.
 
+from flask import jsonify
+from flask_app import app
+@app.route('/get_data')
+def get_data():
+    # jsonify will serialize data into JSON format.
+    return jsonify(message="Hello World")
+
+function getData(){
+    fetch('http://localhost:5000/get_data')
+        .then( response => response.json() )
+        .then( data => console.log(data) )
+}
+// Prints out { message : "Hello World" }
+getData();
+
+<form action='/new_destination' id='myForm' method='post'>
+    <label for="name">Name: </label>
+    <input type='text' name='name'>
+    <input type='submit' id='submit_btn' value='Submit'>
+</form>
+   
+<script>
+    var myForm = document.getElementById('myForm');
+    myForm.onsubmit = function(e){
+        // "e" is the event happening when we submit the form.
+        // do something here ...
+    }
+</script>
+
+<form  id="myForm" method="post">
+    <label for="name">Name: </label>
+    <input type="text" name="name">
+    <input type="submit" id="submit_btn" value="Submit">
+</form>
+   
+<script>
+    var myForm = document.getElementById('myForm');
+    myForm.onsubmit = function(e){
+        // "e" is the js event happening when we submit the form.
+        // e.preventDefault() is a method that stops the default nature of javascript.
+        e.preventDefault();
+        // create FormData object from javascript and send it through a fetch post request.
+        var form = new FormData(myForm);
+        // this how we set up a post request and send the form data.
+        fetch("http://localhost:5000/create/user", { method :'POST', body : form})
+            .then( response => response.json() )
+            .then( data => console.log(data) )
+    }
+</script>
+
+from flask_app.models.user import User
+from flask_app import app
+from flask import render_template, jsonify, request, redirect
+@app.route('/create/user',methods=['POST'])
+def create_user():
+    print(request.form)
+    # write code to save it to our database . . .
+    return jsonify(message="Add a user!!!")
+
+    pipenv install requests
+
+import requests
+from flask_app import app
+import os
+from flask import jsonify
+@app.route('/searching'):
+    r = requests.get(f"https:api.information.com/{os.environ.get('FLASK_API_KEY')}")
+    # we must keep in line with JSON format.
+    # requests has a method to convert the data coming back into JSON.
+    return jsonify( r.json() )
+
+    <form id="searchForm" onsubmit="search(event)" >
+    <h2>Search</h2>
+    <input type="text" name="query">
+    <input type="submit" value="Search" >
+</form>
+
+function search(e){
+    e.preventDefault();
+    var searchForm = document.getElementById('searchForm')
+    var form = new FormData(searchForm);
+    fetch('http://localhost:5000/search',{method:'POST',body:form})
+        .then(res => res.json() )
+        .then( data => console.log(data) )
+}
+
+import requests
+from flask_app import app
+import os
+from flask import jsonify, requests
+@app.route('/searching',methods=['POST']):
+    print(request.form['query'])
+    # now we inject the query into our string
+    r = requests.get(f"https:api.information.com/{os.environ.get('FLASK_API_KEY')}/search?={request.form['query']}")
+    # we must keep in line with JSON format.
+    # requests has a method to convert the data coming back into JSON.
+    return jsonify( r.json() )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
