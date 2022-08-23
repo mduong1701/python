@@ -14,8 +14,13 @@ def main_page():
 def mission_page():
     return render_template("mission.html")
 
+@app.route("/donation")
+def donation_page():
+    return render_template("donation.html")
 
-
+@app.route("/contact")
+def contact_page():
+    return render_template("contact.html")
 
 
 
