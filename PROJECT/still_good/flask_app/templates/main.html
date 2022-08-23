@@ -32,6 +32,14 @@
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
                 
+                <div>
+                    {% if session['user_id'] %}
+                    <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
+                    {% else %}
+                    <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
+                    {% endif %}
+                </div>
+
             </div>
         </div>
     </nav>

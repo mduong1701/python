@@ -22,38 +22,28 @@
 
                 <div class="d-flex justify-content-between mx-3">
                     <div><a class="fs-3 text-white text-decoration-none" href="/"><span>Home</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a>
-                    </div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/order"><span>Order</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a>
-                    </div>
-                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a>
-                    </div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a></div>
+                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a></div>
                 </div>
-
-                <div>
+                
+                <div >
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
                 <div>
                     {% if session['user_id'] %}
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
                     {% else %}
-                    <a class="fs-3 text-white ms-2 text-decoration-none"
-                        href="/login_registration"><span>Login</span></a>
+                    <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="frame mt-5">
-        <div class="mx-auto" id="zero-waste" style="width: 800px;">
-            <p class="fs-3">Contact us at:</p>
-            <p class="text-center fs-4">Plug and Play Tech Center</p>
-            <p class="text-center fs-4">440 N Wolfe Rd,</p>
-            <p class="text-center fs-4">Sunnyvale, CA 94085</p>
-            <p class="text-center fs-4">Phone: (408) 524-1400</p>
-        </div>
+    <div class="frame" id="zero-waste">
+        <h1>Welcome, {{single_user.first_name}}</h1>
     </div>
 
 </body>

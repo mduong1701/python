@@ -52,7 +52,7 @@ class User:
     @classmethod
     def is_exist(cls, data):
         query = "SELECT email FROM users WHERE email = %(email)s;"
-        results = connectToMySQL('recipe_schema').query_db(query, data)
+        results = connectToMySQL('python_project').query_db(query, data)
         if len(results) != 0:
             return True
         else:
@@ -63,12 +63,12 @@ class User:
     @classmethod
     def register(cls, data):
         query = "INSERT INTO users(first_name, last_name, email, password, created_at, updated_at) VALUES(%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW());"
-        return connectToMySQL('recipe_schema').query_db(query, data)
+        return connectToMySQL('python_project').query_db(query, data)
 
     @classmethod
     def get_by_email(cls,data):
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        result = connectToMySQL('recipe_schema').query_db(query,data)
+        result = connectToMySQL('python_project').query_db(query,data)
         # Didn't find a matching user
         if len(result) < 1:
             return False
@@ -77,7 +77,7 @@ class User:
     @classmethod
     def get_by_id(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s;"
-        result = connectToMySQL('recipe_schema').query_db(query,data)
+        result = connectToMySQL('python_project').query_db(query,data)
         single_user = cls(result[0])
         return single_user
 

@@ -1,78 +1,103 @@
 from flask import Flask, render_template, redirect, session, request
 from flask_app import app
 from flask_app.models.user import User
-from flask_app.models.recipe import Recipe
+# from flask_app.models.recipe import Recipe
 from flask import flash
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
+
 
 @app.route("/")
 def main_page():
     return render_template("main.html")
 
+
 @app.route("/mission")
 def mission_page():
     return render_template("mission.html")
 
+@app.route("/order")
+def order_page():
+    if "user_id" not in session:
+        return render_template("warning.html")
+    data = {
+        "id": session['user_id']
+    }
+    single_user = User.get_by_id(data)
+    return render_template("order.html", single_user=single_user)
+
+
+@app.route("/login_registration")
+def login_registration_page():
+    return render_template("registration.html")
+
+
 @app.route("/donation")
 def donation_page():
     return render_template("donation.html")
+
 
 @app.route("/contact")
 def contact_page():
     return render_template("contact.html")
 
 
+@app.route("/register", methods=["POST"])
+def register():
+    raw_data = {
+        "first_name": request.form["first_name"],
+        "last_name": request.form["last_name"],
+        "email": request.form["email"],
+        "password": request.form["password"],
+        "confirm": request.form["confirm"],
+    }
 
-# @app.route("/register", methods=["POST"])
-# def register():
-#     raw_data = {
-#         "first_name": request.form["first_name"],
-#         "last_name": request.form["last_name"],
-#         "email": request.form["email"],
-#         "password": request.form["password"],
-#         "confirm": request.form["confirm"],
-#     }
-    
-#     if not User.validate_register(raw_data):
-#         return redirect("/")
+    if not User.validate_register(raw_data):
+        return redirect("/login_registration")
 
-#     pw_hash = bcrypt.generate_password_hash(request.form['password'])
+    pw_hash = bcrypt.generate_password_hash(request.form['password'])
 
-#     data = {
-#         "first_name": request.form["first_name"],
-#         "last_name": request.form["last_name"],
-#         "email": request.form["email"],
-#         "password": pw_hash
-#     }
+    data = {
+        "first_name": request.form["first_name"],
+        "last_name": request.form["last_name"],
+        "email": request.form["email"],
+        "password": pw_hash
+    }
 
-#     if User.is_exist(data):
-#         flash("This email address has been taken!", "register")
-#         return redirect("/")
-    
-#     session['user_id'] = User.register(data)
+    if User.is_exist(data):
+        flash("This email address has been taken!", "register")
+        return redirect("/login_registration")
 
-#     return render_template("dashboard.html")
+    session['user_id'] = User.register(data)
 
-# @app.route("/login", methods=["POST"])
-# def login():
-#     # see if the username provided exists in the database
-#     data = { 
-#         "email" : request.form["login_email"] 
-#         }
-#     user_in_db = User.get_by_email(data)
-#     # user is not registered in the db
-#     if not user_in_db:
-#         flash("Invalid Email/Password", "login")
-#         return redirect("/")
-#     if not bcrypt.check_password_hash(user_in_db.password, request.form['login_password']):
-#         # if we get False after checking the password
-#         flash("Invalid Email/Password", "login")
-#         return redirect('/')
-#     # if the passwords matched, we set the user_id into session
-#     session['user_id'] = user_in_db.id
-#     # never render on a post!!!
-#     return redirect("/dashboard")
+    return redirect("/order")
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    # see if the username provided exists in the database
+    data = {
+        "email": request.form["login_email"]
+    }
+    user_in_db = User.get_by_email(data)
+    # user is not registered in the db
+    if not user_in_db:
+        flash("Invalid Email/Password", "login")
+        return redirect("/login_registration")
+    if not bcrypt.check_password_hash(user_in_db.password, request.form['login_password']):
+        # if we get False after checking the password
+        flash("Invalid Email/Password", "login")
+        return redirect('/login_registration')
+    # if the passwords matched, we set the user_id into session
+    session['user_id'] = user_in_db.id
+    # never render on a post!!!
+    return redirect("/order")
+
+
+@app.route("/log_out")
+def log_out():
+    session.clear()
+    return redirect("/")
 
 # @app.route("/dashboard")
 # def dashboard():
@@ -82,9 +107,7 @@ def contact_page():
 #         "id": session['user_id']
 #     }
 #     single_user = User.get_by_id(data)
-#     all_recipes = Recipe.get_all()
-#     print(all_recipes)
-#     return render_template("dashboard.html", single_user=single_user, all_recipes=all_recipes)
+#     return render_template("dashboard.html", single_user=single_user)
 
 # @app.route("/recipes/new")
 # def add_recipe_page():
@@ -145,10 +168,6 @@ def contact_page():
 #     edit_recipe = Recipe.get_one(data)
 #     return render_template("edit_page.html", edit_recipe = edit_recipe)
 
-# @app.route("/log_out")
-# def log_out():
-#     session.clear()
-#     return redirect("/dashboard")
 
 # # class Recipe:
 # # self.id = data["id"]

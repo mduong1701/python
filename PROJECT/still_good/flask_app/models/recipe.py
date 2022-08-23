@@ -1,81 +1,81 @@
-# import the function that will return an instance of a connection
-from flask_app.config.mysqlconnection import connectToMySQL
-# model the class after the friend table from our database
-from flask_app.models.user import User
-from flask import flash
+# # import the function that will return an instance of a connection
+# from flask_app.config.mysqlconnection import connectToMySQL
+# # model the class after the friend table from our database
+# from flask_app.models.user import User
+# from flask import flash
 
 
-class Recipe:
-    def __init__(self, data):
-        self.id = data["id"]
-        self.name = data["name"]
-        self.description = data["description"]
-        self.Instruction = data["Instruction"]
-        self.under = data["under"]
-        self.created_at = data["created_at"]
-        self.updated_at = data["updated_at"]
-        self.user_id = data["user_id"]
-        self.user = None
+# class Recipe:
+#     def __init__(self, data):
+#         self.id = data["id"]
+#         self.name = data["name"]
+#         self.description = data["description"]
+#         self.Instruction = data["Instruction"]
+#         self.under = data["under"]
+#         self.created_at = data["created_at"]
+#         self.updated_at = data["updated_at"]
+#         self.user_id = data["user_id"]
+#         self.user = None
 
-    @staticmethod
-    def validate_recipe(data):
-        is_valid = True
-        if len(data["name"]) < 10:
-            is_valid = False
-            flash("Name must be at least 10 characters!!!", "recipe")
+#     @staticmethod
+#     def validate_recipe(data):
+#         is_valid = True
+#         if len(data["name"]) < 10:
+#             is_valid = False
+#             flash("Name must be at least 10 characters!!!", "recipe")
 
-        if len(data["description"]) < 10:
-            is_valid = False
-            flash("Description must be at least 10 characters!!!", "recipe")
+#         if len(data["description"]) < 10:
+#             is_valid = False
+#             flash("Description must be at least 10 characters!!!", "recipe")
 
-        if len(data["Instruction"]) < 10:
-            is_valid = False
-            flash("Instruction must be at least 10 characters!!!", "recipe")
-        return is_valid
+#         if len(data["Instruction"]) < 10:
+#             is_valid = False
+#             flash("Instruction must be at least 10 characters!!!", "recipe")
+#         return is_valid
 
-    @classmethod
-    def save(cls, data):
-        query = "INSERT INTO recipes(name, description, Instruction, under, created_at, updated_at, user_id) VALUES(%(name)s, %(description)s, %(Instruction)s, %(under)s, NOW(), NOW(), %(user_id)s);"
-        new_id = connectToMySQL('recipe_schema').query_db(query, data)
-        print(new_id)
-        return new_id
+#     @classmethod
+#     def save(cls, data):
+#         query = "INSERT INTO recipes(name, description, Instruction, under, created_at, updated_at, user_id) VALUES(%(name)s, %(description)s, %(Instruction)s, %(under)s, NOW(), NOW(), %(user_id)s);"
+#         new_id = connectToMySQL('recipe_schema').query_db(query, data)
+#         print(new_id)
+#         return new_id
 
-    @classmethod
-    def get_all(cls):
-        query = "SELECT * FROM recipes JOIN users ON recipes.user_id = users.id;"
-        results = connectToMySQL('recipe_schema').query_db(query)
-        recipes = []
-        for recipe in results:
-            single_recipe = cls(recipe)
-            user_data = {
-                "id": recipe["users.id"],
-                "first_name": recipe["first_name"],
-                "last_name": recipe["last_name"],
-                "email": recipe["email"],
-                "password": recipe["password"],
-                "created_at": recipe["created_at"],
-                "updated_at": recipe["updated_at"]
-            }
-            single_recipe.user = User(user_data)
-            recipes.append(single_recipe)
-        return recipes
+#     @classmethod
+#     def get_all(cls):
+#         query = "SELECT * FROM recipes JOIN users ON recipes.user_id = users.id;"
+#         results = connectToMySQL('recipe_schema').query_db(query)
+#         recipes = []
+#         for recipe in results:
+#             single_recipe = cls(recipe)
+#             user_data = {
+#                 "id": recipe["users.id"],
+#                 "first_name": recipe["first_name"],
+#                 "last_name": recipe["last_name"],
+#                 "email": recipe["email"],
+#                 "password": recipe["password"],
+#                 "created_at": recipe["created_at"],
+#                 "updated_at": recipe["updated_at"]
+#             }
+#             single_recipe.user = User(user_data)
+#             recipes.append(single_recipe)
+#         return recipes
 
-    @classmethod
-    def get_one(cls, data):
-        query = "SELECT * FROM recipes WHERE id = %(id)s;"
-        result = connectToMySQL('recipe_schema').query_db(query, data)
-        recipe = cls(result[0])
-        return recipe
+#     @classmethod
+#     def get_one(cls, data):
+#         query = "SELECT * FROM recipes WHERE id = %(id)s;"
+#         result = connectToMySQL('recipe_schema').query_db(query, data)
+#         recipe = cls(result[0])
+#         return recipe
 
-    @classmethod
-    def delete_recipe(cls, data):
-        query = "DELETE FROM recipes WHERE id = %(id)s"
-        connectToMySQL('recipe_schema').query_db(query, data)
+#     @classmethod
+#     def delete_recipe(cls, data):
+#         query = "DELETE FROM recipes WHERE id = %(id)s"
+#         connectToMySQL('recipe_schema').query_db(query, data)
 
-    @classmethod
-    def edit(cls, data):
-        query = "UPDATE recipes SET name=%(name)s, description=%(description)s, Instruction=%(Instruction)s, under=%(under)s, updated_at=NOW() WHERE id=%(id)s;"
-        connectToMySQL('recipe_schema').query_db(query, data)
+#     @classmethod
+#     def edit(cls, data):
+#         query = "UPDATE recipes SET name=%(name)s, description=%(description)s, Instruction=%(Instruction)s, under=%(under)s, updated_at=NOW() WHERE id=%(id)s;"
+#         connectToMySQL('recipe_schema').query_db(query, data)
 
 
 # def edit(cls, data):
