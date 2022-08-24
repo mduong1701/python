@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, session, request
 from flask_app import app
 from flask_app.models.user import User
+from flask_app.models.item import Item
 # from flask_app.models.recipe import Recipe
 from flask import flash
 from flask_bcrypt import Bcrypt
@@ -24,7 +25,8 @@ def order_page():
         "id": session['user_id']
     }
     single_user = User.get_by_id(data)
-    return render_template("order.html", single_user=single_user)
+    all_items_by_one_user = Item.get_all_by_one_user(data)
+    return render_template("order.html", single_user=single_user, all_items_by_one_user = all_items_by_one_user)
 
 
 @app.route("/login_registration")
@@ -99,6 +101,76 @@ def log_out():
     session.clear()
     return redirect("/")
 
+@app.route("/items/new")
+def add_recipe_page():
+    return render_template("add_item_page.html")
+
+@app.route("/save_item", methods=["POST"])
+def save_item():
+    data = {
+        "name": request.form["name"],
+        "price": float(request.form["price"]),
+        "quantity": int(request.form["quantity"]),
+        "description": request.form["description"],
+        "instruction": request.form["instruction"],
+        "address": request.form["address"],
+        "user_id": session["user_id"]
+    }
+
+    if not Item.validate_item(data):
+        return redirect("/items/new")
+    Item.save(data)
+    return redirect("/order")
+
+@app.route("/view_item/<int:id>")
+def view_item(id):
+    data = {
+        "id": id
+    }
+    info = Item.get_one(data)
+    return render_template("view_item.html", info=info)
+
+@app.route("/delete/<int:id>")
+def delete_item(id):
+    data = {
+        "id": id
+    }
+    Item.delete_item(data)
+    return redirect("/order")
+
+@app.route("/deals")
+def deals_page():
+    all_items = Item.get_all()
+    return render_template("deals.html", all_items = all_items)
+    
+    
+@app.route("/edit/<int:id>")
+def edit_item(id):
+    data = {
+        "id": id
+    }
+    edit_item = Item.get_one(data)
+    return render_template("edit_page.html", edit_item = edit_item)
+
+@app.route("/save_edit/<int:id>", methods=["POST"])
+def save_edit(id):
+    data = {
+        "id": id,
+        "name": request.form["name"],
+        "price": float(request.form["price"]),
+        "quantity": int(request.form["quantity"]),
+        "description": request.form["description"],
+        "instruction": request.form["instruction"],
+        "address": request.form["address"],
+        "user_id": session["user_id"]
+    }
+    if not Item.validate_item(data):
+        return redirect(f"/edit/{id}")
+    Item.edit(data)
+    return redirect("/order")
+
+
+
 # @app.route("/dashboard")
 # def dashboard():
 #     if "user_id" not in session:
@@ -109,40 +181,11 @@ def log_out():
 #     single_user = User.get_by_id(data)
 #     return render_template("dashboard.html", single_user=single_user)
 
-# @app.route("/recipes/new")
-# def add_recipe_page():
-#     return render_template("add_recipe_page.html")
 
-# @app.route("/save_recipe", methods=["POST"])
-# def save_recipe():
-#     data = {
-#         "name": request.form["name"],
-#         "description": request.form["description"],
-#         "Instruction": request.form["Instruction"],
-#         # "created_at": request.form["created_at"],
-#         "under": request.form["under"],
-#         "user_id": session["user_id"]
-#     }
-#     if not Recipe.validate_recipe(data):
-#         return redirect("/recipes/new")
-#     Recipe.save(data)
-#     return redirect("/dashboard")
 
-# @app.route("/save_edit/<int:id>", methods=["POST"])
-# def save_edit(id):
-#     data = {
-#         "id": id,
-#         "name": request.form["name"],
-#         "description": request.form["description"],
-#         "Instruction": request.form["Instruction"],
-#         # "created_at": request.form["created_at"],
-#         "under": request.form["under"],
-#         "user_id": session["user_id"]
-#     }
-#     if not Recipe.validate_recipe(data):
-#         return redirect(f"/edit/{id}")
-#     Recipe.edit(data)
-#     return redirect("/dashboard")
+
+
+
 
 # @app.route("/view_recipe/<int:id>")
 # def view_recipe(id):
@@ -152,21 +195,8 @@ def log_out():
 #     info = Recipe.get_one(data)
 #     return render_template("view_recipe.html", info=info)
 
-# @app.route("/delete/<int:id>")
-# def delete_recipe(id):
-#     data = {
-#         "id": id
-#     }
-#     Recipe.delete_recipe(data)
-#     return redirect("/dashboard")
 
-# @app.route("/edit/<int:id>")
-# def edit_recipe(id):
-#     data = {
-#         "id": id
-#     }
-#     edit_recipe = Recipe.get_one(data)
-#     return render_template("edit_page.html", edit_recipe = edit_recipe)
+
 
 
 # # class Recipe:

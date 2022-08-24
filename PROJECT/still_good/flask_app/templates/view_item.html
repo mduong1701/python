@@ -32,7 +32,6 @@
                 <div >
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
-                
                 <div>
                     {% if session['user_id'] %}
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
@@ -40,15 +39,44 @@
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
                     {% endif %}
                 </div>
-
             </div>
         </div>
     </nav>
 
     <div class="frame" id="zero-waste">
-        <img src="/static/zero-waste.jpeg" alt="banner" style="width: 100%;">
+        <div class="frame mt-5">
+            <h1>{{info.name}}</h1>
+
+            <h3>Price:</h3>
+            <p>{{info.price}}</p>
+
+            <h3>Quantity:</h3>
+            <p>{{info.quantity}}</p>
+
+            <h3>Description:</h3>
+            <p>{{info.description}}</p>
+
+            <h3>Instructions:</h3>
+            <p>{{info.instruction}}</p>
+
+            <h3>Address:</h3>
+            <p>{{info.address}}</p>
+
+            <a href="/order">Back to Dashboard</a>
+        </div>
+
     </div>
+
+    
+
 
 </body>
 
 </html>
+
+
+
+
+
+
+

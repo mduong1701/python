@@ -32,7 +32,6 @@
                 <div >
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
-                
                 <div>
                     {% if session['user_id'] %}
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
@@ -40,14 +39,50 @@
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
                     {% endif %}
                 </div>
-
             </div>
         </div>
     </nav>
 
     <div class="frame" id="zero-waste">
-        <img src="/static/zero-waste.jpeg" alt="banner" style="width: 100%;">
+
+        <div class="d-flex justify-content-right">
+            <div><a href="/items/new">+ Create a new post</a></div>
+        </div>
+
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price ($)</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in all_items %}
+                <tr>
+                    <td>{{item.name}}</th>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>
+                        <a href="/view_item/{{item.id}}">view</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
     </div>
+
+    
+
 
 </body>
 
