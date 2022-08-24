@@ -23,7 +23,8 @@
                 <div class="d-flex justify-content-between mx-3">
                     <div><a class="fs-3 text-white text-decoration-none" href="/"><span>Home</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/order"><span>Order</span></a></div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/order"><span>Post</span></a></div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/deals"><span>Deals</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a></div>
                     <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a></div>
                 </div>
@@ -44,7 +45,47 @@
 
     <div class="frame" id="zero-waste">
         <h1>Welcome, {{single_user.first_name}}</h1>
+
+        <div class="d-flex justify-content-right">
+            <div><a href="/items/new">+ Create a new post</a></div>
+        </div>
+
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price ($)</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in all_items_by_one_user %}
+                <tr>
+                    <td>{{item.name}}</th>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>
+                        <a href="/view_item/{{item.id}}">view</a>
+                        <a href="/edit/{{item.id}}">edit</a>
+                        <a href="/delete/{{item.id}}">delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
     </div>
+
+    
+
 
 </body>
 

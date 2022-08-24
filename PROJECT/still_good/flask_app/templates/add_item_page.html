@@ -46,7 +46,7 @@
     </nav>
 
     <div class="frame mt-5">
-        <h2>Edit an item!</h2>
+        <h2>Add a New Item!</h2>
         {% with messages = get_flashed_messages(category_filter=['item']) %}
             {% if messages %}
                 <div class="alert alert-danger" role="alert">
@@ -56,39 +56,45 @@
                 </div>
             {% endif %}
         {% endwith %}
+        <div class="d-flex justify-content-between">
+            <!-- <div class="text-danger">Description must not be blank</div> -->
+            <div class="d-flex justify-content-right">
+                <div><a href="/items/new">Back</a></div>
+            </div>
+        </div>
         <div class="mt-3 w-100">
-            <form action="/save_edit/{{edit_item.id}}" method="post">
+            <form action="/save_item" method="post">
                 <div class="d-flex justify-content-evenly">
                     <div class="container-fluid">
 
                         <div class="mb-3">
                             <label class="form-label">Name</label>
-                            <input type="text" class="form-control" name="name" style="width: 500px" value="{{edit_item.name}}">
+                            <input type="text" class="form-control" name="name" style="width: 500px">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Price</label>
-                            <input type="number" class="form-control" name="price" style="width: 500px" value="{{edit_item.price}}">
+                            <input type="number" class="form-control" name="price" style="width: 500px">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Quantity</label>
-                            <input type="number" class="form-control" name="quantity" style="width: 500px" value="{{edit_item.quantity}}">
+                            <input type="number" class="form-control" name="quantity" style="width: 500px">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <input type="text" class="form-control" name="description" style="width: 500px" value="{{edit_item.description}}">
+                            <input type="text" class="form-control" name="description" style="width: 500px">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Instruction</label>
-                            <input type="text" class="form-control" name="instruction" style="width: 500px" value="{{edit_item.instruction}}">
+                            <input type="text" class="form-control" name="instruction" style="width: 500px">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" style="width: 500px" value="{{edit_item.address}}">
+                            <input type="text" class="form-control" name="address" style="width: 500px">
                         </div>
 
                     </div>
@@ -108,9 +114,41 @@
     
     
     
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
