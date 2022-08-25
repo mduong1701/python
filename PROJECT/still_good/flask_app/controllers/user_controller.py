@@ -109,8 +109,8 @@ def add_recipe_page():
 def save_item():
     data = {
         "name": request.form["name"],
-        "price": float(request.form["price"]),
-        "quantity": int(request.form["quantity"]),
+        "price": request.form["price"],
+        "quantity": request.form["quantity"],
         "description": request.form["description"],
         "instruction": request.form["instruction"],
         "address": request.form["address"],

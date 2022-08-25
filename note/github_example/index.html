@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <input type="button" value="Click to Git user" onclick="getUser()">
+    <!-- <input type="button" value="Click to Git user" onclick="getUser()">
     <div>
         <p>Here is the info: </p>
         <div >
             <img src="" alt="image" class="display">
         </div>
-    </div>
+    </div> -->
 
-    <script src="script.js"></script> 
+    <div id="daily-quote"> FALLBACK QUOTE</div>
+
+    <script type="text/javascript">
+
+        const api_url = "https://zenquotes.io/api/random/";
+
+        async function getapi(url) {
+            const response = await fetch(url);
+            var data = await response.json();
+            document.getElementById("daily-quote").innerHTML = JSON.parse(data);
+        }
+        getapi(api_url);
+
+    </script>
+
+
+    <!-- <script src="script.js"></script>  -->
 </body>
+
 </html>

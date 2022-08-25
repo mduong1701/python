@@ -12,11 +12,23 @@
 // }
 // console.log(getCoderData());
 
-async function getUser(){
-    var count = document.querySelector(".display");
+// async function getUser(){
+//     // var count = document.querySelector(".display");
 
-    var response = await fetch("https://api.github.com/users/adion81");
-    var coderData = await response.json();
-    console.log(coderData);
-    count.src = coderData.avatar_url;
+//     // var response = await fetch("https://api.github.com/users/adion81");
+
+//     var coderData = await response.json();
+//     console.log(coderData);
+//     // count.src = coderData.avatar_url;
+// }
+
+
+const api_url = "https://zenquotes.io/api/quotes/";
+
+async function getapi(url) {
+    const response = await fetch(url);
+    var data = await response.json();
+    console.log(data);
 }
+
+getapi(api_url);

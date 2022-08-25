@@ -1,0 +1,15 @@
+.result {
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    height:400px;
+    width: 300px;
+}
+
+.result img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}

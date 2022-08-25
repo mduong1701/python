@@ -28,11 +28,11 @@ class Item:
 
         if float(data["price"]) < 0:
             is_valid = False
-            flash("Price must be positive!!!", "item")
+            flash("Price must be a positive number!!!", "item")
 
         if int(data["quantity"]) < 0:
             is_valid = False
-            flash("Quantity must be positive!!!", "item")
+            flash("Quantity must be a positive number!!!", "item")
 
         if len(data["description"]) < 10:
             is_valid = False

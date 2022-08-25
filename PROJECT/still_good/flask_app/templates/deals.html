@@ -22,21 +22,25 @@
 
                 <div class="d-flex justify-content-between mx-3">
                     <div><a class="fs-3 text-white text-decoration-none" href="/"><span>Home</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a></div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a>
+                    </div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/order"><span>Post</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/deals"><span>Deals</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a></div>
-                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a></div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a>
+                    </div>
+                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a>
+                    </div>
                 </div>
-                
-                <div >
+
+                <div>
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
                 <div>
                     {% if session['user_id'] %}
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
                     {% else %}
-                    <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
+                    <a class="fs-3 text-white ms-2 text-decoration-none"
+                        href="/login_registration"><span>Login</span></a>
                     {% endif %}
                 </div>
             </div>
@@ -44,10 +48,6 @@
     </nav>
 
     <div class="frame" id="zero-waste">
-
-        <div class="d-flex justify-content-right">
-            <div><a href="/items/new">+ Create a new post</a></div>
-        </div>
 
         <table class="table table-success table-striped">
             <thead>
@@ -59,7 +59,7 @@
                 </tr>
             </thead>
             <tbody>
-            {% for item in all_items %}
+                {% for item in all_items %}
                 <tr>
                     <td>{{item.name}}</th>
                     <td>{{item.price}}</td>
@@ -68,21 +68,26 @@
                         <a href="/view_item/{{item.id}}">view</a>
                     </td>
                 </tr>
-            {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
 
 
+        <div class="buttons">
+            <button id="food_btn">Give me a suggestion!</button>
+        </div>
 
-
-
-
+        <div id="food_result" class="result">
+            <p>Random Food Placeholder</p>
+        </div>
 
 
     </div>
 
-    
 
+    {% block javascript %}
+    <script src="{{ url_for('static',filename='script.js') }}"></script>
+{% endblock %}
 
 </body>
 

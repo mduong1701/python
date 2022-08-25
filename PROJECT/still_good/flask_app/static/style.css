@@ -28,3 +28,19 @@ nav {
 #zero-waste{
     margin-top: 75px;
 }
+
+.result {
+    background-color: rgb(161, 227, 235);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    height: 750px;
+    width: 750px;
+}
+
+.result img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
