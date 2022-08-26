@@ -22,25 +22,21 @@
 
                 <div class="d-flex justify-content-between mx-3">
                     <div><a class="fs-3 text-white text-decoration-none" href="/"><span>Home</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a>
-                    </div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/mission"><span>Mission</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/order"><span>Post</span></a></div>
                     <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/deals"><span>Deals</span></a></div>
-                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a>
-                    </div>
-                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a>
-                    </div>
+                    <div><a class="fs-3 text-white ms-5 text-decoration-none" href="/donation"><span>Donation</span></a></div>
+                    <div><a class="fs-3 text-white mx-5 text-decoration-none" href="/contact"><span>Contact</span></a></div>
                 </div>
-
-                <div>
+                
+                <div >
                     <img src="/static/cart.png" alt="shopping cart" style="height: 50px;">
                 </div>
                 <div>
                     {% if session['user_id'] %}
                     <a class="fs-3 text-white ms-2 text-decoration-none" href="/log_out"><span>Logout</span></a>
                     {% else %}
-                    <a class="fs-3 text-white ms-2 text-decoration-none"
-                        href="/login_registration"><span>Login</span></a>
+                    <a class="fs-3 text-white ms-2 text-decoration-none" href="/login_registration"><span>Login</span></a>
                     {% endif %}
                 </div>
             </div>
@@ -48,47 +44,32 @@
     </nav>
 
     <div class="frame" id="zero-waste">
+        <div class="frame mt-5">
+            <h1>{{info.name}}</h1>
 
-        <table class="table table-success table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price ($)</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in all_items %}
-                <tr>
-                    <td>{{item.name}}</th>
-                    <td>{{item.price}}</td>
-                    <td>{{item.quantity}}</td>
-                    <td>
-                        <a href="/view_deal/{{item.id}}">view</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    
+            <h3>Price ($):</h3>
+            <p>{{info.price}}</p>
 
-        <div class="buttons">
-            <button id="food_btn">Give me a suggestion!</button>
+            <h3>Quantity:</h3>
+            <p>{{info.quantity}}</p>
+
+            <h3>Description:</h3>
+            <p>{{info.description}}</p>
+
+            <h3>Instructions:</h3>
+            <p>{{info.instruction}}</p>
+
+            <h3>Address:</h3>
+            <p>{{info.address}}</p>
+            <a href="/back_to_deal">Back</a>
         </div>
-
-        <div id="food_result" class="result">
-            <p>Random Food Placeholder</p>
-        </div>
-
-
+        
     </div>
 
+    
 
-    {% block javascript %}
-    <script src="{{ url_for('static',filename='script.js') }}"></script>
-{% endblock %}
 
 </body>
 
 </html>
+

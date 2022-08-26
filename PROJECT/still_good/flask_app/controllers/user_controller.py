@@ -130,6 +130,14 @@ def view_item(id):
     info = Item.get_one(data)
     return render_template("view_item.html", info=info)
 
+@app.route("/view_deal/<int:id>")
+def view_deal(id):
+    data = {
+        "id": id
+    }
+    info = Item.get_one(data)
+    return render_template("view_deal.html", info=info)
+
 @app.route("/delete/<int:id>")
 def delete_item(id):
     data = {
@@ -142,7 +150,14 @@ def delete_item(id):
 def deals_page():
     all_items = Item.get_all()
     return render_template("deals.html", all_items = all_items)
+
+@app.route("/back_to_item")
+def back_to_items():
+    return redirect("/order")
     
+@app.route("/back_to_deal")
+def back_to_deals():
+    return redirect("/deals")
     
 @app.route("/edit/<int:id>")
 def edit_item(id):
