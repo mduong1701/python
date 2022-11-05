@@ -1,4 +1,5 @@
-# [89, 48, 14]
+import math
+
 def max_quality(array, channels):
     array.sort()
     quality = 0
@@ -12,7 +13,7 @@ def max_quality(array, channels):
     if max_value_index % 2 == 0:
         quality += array[max_value_index // 2]
     else: 
-        quality += (array[max_value_index // 2] + array[(max_value_index // 2) + 1]) / 2
+        quality += math.ceil((array[max_value_index // 2] + array[(max_value_index // 2) + 1]) / 2)
 
     return quality
 
